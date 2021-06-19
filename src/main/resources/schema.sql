@@ -1,19 +1,19 @@
-DROP TABLE customers;
+DROP TABLE IF EXISTS branch_customers;
+DROP TABLE IF EXISTS customer_branches;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS branches;
 
-DROP TABLE customer_branches;
 
 CREATE TABLE customers (
     id   INTEGER      NOT NULL AUTO_INCREMENT,
-    fullname VARCHAR(128) NOT NULL,
+    full_name VARCHAR(128) NOT NULL,
     PRIMARY KEY (id)
 );
 
-DROP TABLE branches;
-
-DROP TABLE branch_customers;
 
 CREATE TABLE branches (
     id   INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(128) NOT NULL,
     PRIMARY KEY (id)
 );
+

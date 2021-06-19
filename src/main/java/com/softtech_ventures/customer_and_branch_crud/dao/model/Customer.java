@@ -21,7 +21,7 @@ public class Customer {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "fullname")
+  @Column(name = "full_name")
   private String fullName;
 
   @JsonIgnore
