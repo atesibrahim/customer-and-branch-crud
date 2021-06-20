@@ -1,14 +1,16 @@
 
-# Information for Customer and Branch CRUD Application.
+# Information for Customer and Branch Rest CRUD Application.
 
-This app will run on your local machine 8585 port.
+###### This app has been developed as Rest Service with Spring Boot
+
+App will run on 8585 port.
 
 When you are running to started this app on your pc;
 schema.sql will create customers and branches
 and their many to many tables which are customer_branches and branch_customers automatically.
 Then scripts will executed in import.sql file to insert some dummy data to tables. 
 
-Content of schmea.sql and import.sql as following;
+Content of `schmea.sql` and `import.sql` as following;
 
 #### schema.sql:
 
