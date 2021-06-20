@@ -4,7 +4,8 @@ import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
 import com.stech_vent.customer_and_branch_crud.dao.repository.contract.BranchRepository;
 import com.stech_vent.customer_and_branch_crud.dao.repository.contract.CustomerRepository;
-import com.stech_vent.customer_and_branch_crud.service.customer.contract.CustomerService;
+import com.stech_vent.customer_and_branch_crud.service.branch.contract.BranchService;
+import com.stech_vent.customer_and_branch_crud.service.branch.contract.impl.BranchServiceImpl;
 import com.stech_vent.customer_and_branch_crud.service.customer.contract.impl.CustomerServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class CustomerServiceTest {
+public class BranchServiceTest {
 
     @Mock
     CustomerRepository customerRepository;
@@ -24,7 +25,7 @@ public class CustomerServiceTest {
     @Mock
     BranchRepository branchRepository;
 
-    private CustomerService customerService;
+    private BranchService branchService;
 
     private Customer customer;
 
@@ -45,7 +46,7 @@ public class CustomerServiceTest {
 
         customerRepository = mock(CustomerRepository.class);
         branchRepository = mock(BranchRepository.class);
-        customerService = new CustomerServiceImpl(customerRepository, branchRepository);
+        branchService = new BranchServiceImpl(customerRepository, branchRepository);
         String name = "Ates";
         customer = new Customer();
         customer.setFullName("Ibrahim");
@@ -71,82 +72,35 @@ public class CustomerServiceTest {
         optionalBranch = Optional.of(branch);
     }
 
-
     @Test
-    public void getCustomerByIdTest() throws Exception {
+    public void getBranchCustomersTest() throws Exception {
 
-        when(customerRepository.findById(1L)).thenReturn(optionalCustomer);
+        when(branchRepository.findById(1L)).thenReturn(optionalBranch);
 
-        assertEquals(customer, customerService.getCustomerById(1L));
+        assertTrue(branchService.getBranchCustomers(1L).isEmpty());
 
     }
 
-    @Test
-    public void getCustomerListTest() throws Exception {
-
-        when(customerRepository.findAll()).thenReturn(customerList);
-
-        assertEquals(customerList, customerService.getCustomerList());
-
-    }
 
     @Test
-    public void addCustomerTest() throws Exception {
-
-        when(customerRepository.save(customer)).thenReturn(customer);
-
-        assertEquals(customer, customerService.addCustomer(customer));
-
-    }
-
-    @Test
-    public void updateCustomerTest() throws Exception {
+    public void addCustomerToBranchTest() throws Exception {
         when(customerRepository.findById(1L)).thenReturn(optionalCustomer);
         when(branchRepository.findById(1L)).thenReturn(optionalBranch);
 
-        when(customerRepository.save(customer)).thenReturn(customer);
+        when(branchRepository.save(branch)).thenReturn(branch);
 
-        assertEquals(customer, customerService.updateCustomerById(1L, customer));
-
-    }
-
-    @Test
-    public void deleteCustomerTest() throws Exception {
-
-        doNothing().when(customerRepository).deleteById(1L);
-
-        customerService.deleteCustomerById(1L);
+        assertEquals(branch, branchService.addCustomerToBranch(1L, 1L));
 
     }
 
     @Test
-    public void getCustomerBranchesTest() throws Exception {
-
-        when(customerRepository.findById(1L)).thenReturn(optionalCustomer);
-
-        assertTrue(customerService.getCustomerBranches(1L).isEmpty());
-
-    }
-
-    @Test
-    public void addBranchToCustomerTest() throws Exception {
+    public void deleteCustomerFromBranchTest() throws Exception {
         when(customerRepository.findById(1L)).thenReturn(optionalCustomer);
         when(branchRepository.findById(1L)).thenReturn(optionalBranch);
 
-        when(customerRepository.save(customer)).thenReturn(customer);
+        when(branchRepository.save(branch)).thenReturn(branch);
 
-        assertEquals(customer, customerService.addBranchToCustomer(1L, 1L));
-
-    }
-
-    @Test
-    public void deleteBranchFromCustomerTest() throws Exception {
-        when(customerRepository.findById(1L)).thenReturn(optionalCustomer);
-        when(branchRepository.findById(1L)).thenReturn(optionalBranch);
-
-        when(customerRepository.save(customer)).thenReturn(customer);
-
-        assertEquals(customer, customerService.deleteBranchFromCustomer(1L, 1L));
+        assertEquals(branch, branchService.addCustomerToBranch(1L, 1L));
 
     }
 

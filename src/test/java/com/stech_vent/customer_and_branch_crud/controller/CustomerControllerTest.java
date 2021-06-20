@@ -1,9 +1,10 @@
 package com.stech_vent.customer_and_branch_crud.controller;
 
-import com.stech_vent.customer_and_branch_crud.controller.contract.CustomerController;
+import com.stech_vent.customer_and_branch_crud.controller.customer.CustomerControllerImpl;
+import com.stech_vent.customer_and_branch_crud.controller.customer.contract.CustomerController;
 import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
-import com.stech_vent.customer_and_branch_crud.service.contract.CustomerService;
+import com.stech_vent.customer_and_branch_crud.service.customer.contract.CustomerService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -135,15 +136,6 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void getBranchCustomersTest() throws Exception {
-
-        when(service.getBranchCustomers(1L)).thenReturn(customers);
-
-        assertEquals(customersResponseEntity, customerController.getBranchCustomers(1L));
-
-    }
-
-    @Test
     public void addBranchToCustomerTest() throws Exception {
 
         when(service.addBranchToCustomer(1L, 1L)).thenReturn(customer);
@@ -153,31 +145,12 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void addCustomerToBranchTest() throws Exception {
-
-        when(service.addCustomerToBranch(1L, 1L)).thenReturn(branch);
-
-        assertEquals(branchResponseEntity, customerController.addCustomerToBranch(1L, 1L));
-
-    }
-
-    @Test
     public void deleteBranchFromCustomerTest() throws Exception {
 
-        when(service.deleteBranchFromCustomer(1L, 1L)).thenReturn(customer);
+        when(service.deleteBranchFromCustomer(1L, 1L)).thenReturn(branches);
 
-        assertEquals(customerResponseEntity, customerController.deleteBranchFromCustomer(1L, 1L));
-
-    }
-
-    @Test
-    public void deleteCustomerFromBranchTest() throws Exception {
-
-        when(service.deleteCustomerFromBranch(1L, 1L)).thenReturn(branch);
-
-        assertEquals(branchResponseEntity, customerController.deleteCustomerFromBranch(1L, 1L));
+        assertEquals(branchesResponseEntity, customerController.deleteBranchFromCustomer(1L, 1L));
 
     }
-
 
 }

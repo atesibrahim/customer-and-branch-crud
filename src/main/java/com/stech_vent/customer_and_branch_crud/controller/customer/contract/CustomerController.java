@@ -1,4 +1,4 @@
-package com.stech_vent.customer_and_branch_crud.controller.contract;
+package com.stech_vent.customer_and_branch_crud.controller.customer.contract;
 
 import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
@@ -37,19 +37,10 @@ public interface CustomerController {
   @GetMapping("/getcustomerbranches/{id}")
   ResponseEntity<Set<Branch>> getCustomerBranches(@PathVariable("id") Long id) throws ResourceNotFoundException;
 
-  @GetMapping("/getbranchcustomers/{id}")
-  ResponseEntity<Set<Customer>> getBranchCustomers(@PathVariable("id") Long id) throws ResourceNotFoundException;
-
-  @PostMapping("/addcustomertobranch/{customerid}/{branchid}")
-  ResponseEntity<Branch> addCustomerToBranch(@PathVariable("customerid") Long customerId, @PathVariable("branchid") Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException;
-
-  @DeleteMapping("/deletecustomerfrombranch/{customerid}/{branchid}")
-  ResponseEntity<Branch> deleteCustomerFromBranch(@PathVariable("customerid") Long customerId, @PathVariable("branchid") Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException;
-
   @PostMapping("/addbranchtocustomer/{branchid}/{customerid}")
   ResponseEntity<Customer> addBranchToCustomer(@PathVariable("branchid") Long branchId, @PathVariable("customerid") Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
 
   @DeleteMapping("/deletebranchfromcustomer/{branchid}/{customerid}")
-  ResponseEntity<Customer> deleteBranchFromCustomer(@PathVariable("branchid") Long branchId, @PathVariable("customerid") Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
+  ResponseEntity<Set<Branch> > deleteBranchFromCustomer(@PathVariable("branchid") Long branchId, @PathVariable("customerid") Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
 
 }

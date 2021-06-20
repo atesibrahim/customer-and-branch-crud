@@ -1,9 +1,9 @@
-package com.stech_vent.customer_and_branch_crud.controller;
+package com.stech_vent.customer_and_branch_crud.controller.customer;
 
-import com.stech_vent.customer_and_branch_crud.controller.contract.CustomerController;
+import com.stech_vent.customer_and_branch_crud.controller.customer.contract.CustomerController;
 import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
-import com.stech_vent.customer_and_branch_crud.service.contract.CustomerService;
+import com.stech_vent.customer_and_branch_crud.service.customer.contract.CustomerService;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotFoundException;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotImplementedException;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotModifiedException;
@@ -69,27 +69,12 @@ public class CustomerControllerImpl implements CustomerController {
   }
 
   @Override
-  public ResponseEntity<Set<Customer>> getBranchCustomers(Long id) throws ResourceNotFoundException {
-    return new ResponseEntity<>(customerService.getBranchCustomers(id), HttpStatus.OK);
-  }
-
-  @Override
-  public ResponseEntity<Branch> addCustomerToBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException {
-    return new ResponseEntity<>(customerService.addCustomerToBranch(customerId, branchId), HttpStatus.OK);
-  }
-
-  @Override
-  public ResponseEntity<Branch> deleteCustomerFromBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException {
-    return new ResponseEntity<>(customerService.deleteCustomerFromBranch(customerId, branchId), HttpStatus.OK);
-  }
-
-  @Override
   public ResponseEntity<Customer> addBranchToCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException {
     return new ResponseEntity<>(customerService.addBranchToCustomer(branchId, customerId), HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<Customer> deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException {
+  public ResponseEntity<Set<Branch> > deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException {
     return new ResponseEntity<>(customerService.deleteBranchFromCustomer(branchId, customerId), HttpStatus.OK);
   }
 }

@@ -53,8 +53,12 @@ INSERT INTO branch_customers (branch_id, customer_id) VALUES (10, 2);
 
 * MySQL must be running on 3306 port, if not please change port number in application.properties
 
+## ALL CRUD REST SERVICES
 
-## ALL CRUD REST SERVICES 
+##### CHECK HEALTH 
+If you want to see service status is running or not,
+**Customer Check Health URL:  localhost:8585/customer/health**
+**Branch Check Health URL:  localhost:8585/branch/health**
 
 ##### LIST ALL CUSTOMER:
 
@@ -171,7 +175,7 @@ When branch not found Response returns as:
 
 ##### GET BRANCH CUSTOMERS
 
-**URL: localhost:8585/customer/getbranchcustomers/{id}**
+**URL: localhost:8585/branch/getbranchcustomers/{id}**
 
 Response:
 [
@@ -197,7 +201,7 @@ When customer not found Response returns as:
 
 ##### ADD CUSTOMER to BRANCH:
 
-**URL: localhost:8585/customer/addcustomertobranch/{customerid}/{branchid}**
+**URL: localhost:8585/branch/addcustomertobranch/{customerid}/{branchid}**
 
 After success response returns added branch to customer as;
 
@@ -249,19 +253,51 @@ Or If customer id not exists to be added branch then response returns as;
 
 ##### DELETE CUSTOMER from BRANCH:
 
-**URL: localhost:8585/customer/deletebranchfromcustomer/{branchid}/{customerid}**
+**URL: localhost:8585/branch/deletecustomerfrombranch/{customerid}/{branchid}**
 
-Returned deleted customer from branch: 
-{
-    "id": 3,
-    "fullName": "Ates Ates"
-}
+
+Before request customer's branch list:
+ [
+     {
+         "id": 20,
+         "name": "Besiktas"
+     },
+     {
+         "id": 10,
+         "name": "Kadikoy"
+     }
+ ]
+
+After request [localhost:8585/customer/deletebranchfromcustomer/20/1](localhost:8585/customer/deletebranchfromcustomer/20/1),
+response returned new customer's branch list after deleted branch as: 
+[
+    {
+        "id": 10,
+        "name": "Kadikoy"
+    }
+]
  
  ##### DELETE BRANCH from CUSTOMER:
- **URL: localhost:8585/customer/deletecustomerfrombranch/{customerid}/{branchid}**
+ **URL: llocalhost:8585/customer/deletebranchfromcustomer/{branchid}/{customerid}**
  
- Returned deleted branch from customer: 
- {
-     "id": 30,
-     "name": "Maltepe"
- }
+ Before request branch's customer list:
+ 
+ [
+     {
+         "id": 1,
+         "fullName": "Ibrahim Ates"
+     },
+     {
+         "id": 2,
+         "fullName": "Halil Ates"
+     }
+ ]
+ 
+ After request [localhost:8585/customer/deletebranchfromcustomer/20/1](localhost:8585/branch/deletecustomerfrombranch/2/10),
+ response returned new branch's customer list after deleted customer as: 
+ [
+     {
+         "id": 1,
+         "fullName": "Ibrahim Ates"
+     }
+ ]

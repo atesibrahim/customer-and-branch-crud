@@ -1,10 +1,10 @@
-package com.stech_vent.customer_and_branch_crud.service.contract.impl;
+package com.stech_vent.customer_and_branch_crud.service.customer.contract.impl;
 
 import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
 import com.stech_vent.customer_and_branch_crud.dao.repository.contract.BranchRepository;
 import com.stech_vent.customer_and_branch_crud.dao.repository.contract.CustomerRepository;
-import com.stech_vent.customer_and_branch_crud.service.contract.CustomerService;
+import com.stech_vent.customer_and_branch_crud.service.customer.contract.CustomerService;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotFoundException;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotImplementedException;
 import com.stech_vent.customer_and_branch_crud.utils.exception.ResourceNotModifiedException;
@@ -89,43 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public Set<Customer> getBranchCustomers(Long id) throws ResourceNotFoundException {
-    return getBranchById(id).getCustomers();
-  }
-
-  @Override
-  public Branch addCustomerToBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException {
-    Customer customer = getCustomerById(customerId);
-
-    Branch branch = getBranchById(branchId);
-
-    branch.getCustomers().add(customer);
-
-    try {
-      return branchRepository.save(branch);
-    }catch (Exception exception){
-      logger.info("Error occured while add customer to branch. error message:", exception.getMessage());
-      throw new ResourceNotImplementedException("Error occured while add customer to branch:" + exception.getMessage());
-    }
-  }
-
-  @Override
-  public Branch deleteCustomerFromBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException {
-    Customer customer = getCustomerById(customerId);
-
-    Branch branch = getBranchById(branchId);
-
-    branch.getCustomers().remove(customer);
-
-  try{
-    return branchRepository.save(branch);
-    }catch (Exception exception){
-      logger.info("Error occured while delete customer from branch. error message:", exception.getMessage());
-      throw new ResourceNotImplementedException("Error occured while delete customer from branch:" + exception.getMessage());
-    }
-  }
-
-  @Override
   public Customer addBranchToCustomer(Long branchId, Long customerId)throws ResourceNotFoundException, ResourceNotImplementedException {
     Customer customer = getCustomerById(customerId);
 
@@ -142,7 +105,7 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public Customer deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException {
+  public Set<Branch>  deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException {
     Customer customer = getCustomerById(customerId);
 
     Branch branch = getBranchById(branchId);
@@ -150,7 +113,8 @@ public class CustomerServiceImpl implements CustomerService {
     customer.getBranches().remove(branch);
 
   try{
-    return customerRepository.save(customer);
+    customerRepository.save(customer);
+    return getCustomerBranches(customerId);
     }catch (Exception exception){
       logger.info("Error occured while delete customer from branch:. error message:", exception.getMessage());
       throw new ResourceNotImplementedException("Error occured while delete customer from branch:" + exception.getMessage());

@@ -1,4 +1,4 @@
-package com.stech_vent.customer_and_branch_crud.service.contract;
+package com.stech_vent.customer_and_branch_crud.service.customer.contract;
 
 import com.stech_vent.customer_and_branch_crud.dao.model.Branch;
 import com.stech_vent.customer_and_branch_crud.dao.model.Customer;
@@ -25,13 +25,7 @@ public interface CustomerService {
 
   Set<Branch> getCustomerBranches(Long id) throws ResourceNotFoundException;
 
-  Set<Customer> getBranchCustomers(Long id) throws ResourceNotFoundException;
-
-  Branch addCustomerToBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException;
-
-  Branch deleteCustomerFromBranch(Long customerId, Long branchId) throws ResourceNotFoundException, ResourceNotImplementedException;
-
   Customer addBranchToCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
 
-  Customer deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
+  Set<Branch>  deleteBranchFromCustomer(Long branchId, Long customerId) throws ResourceNotFoundException, ResourceNotImplementedException;
 }
