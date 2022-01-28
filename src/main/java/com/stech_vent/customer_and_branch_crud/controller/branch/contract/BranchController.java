@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @Validated
-@RequestMapping("/branch")
+@RequestMapping("/branchs")
 public interface BranchController {
 
   @GetMapping("/health")
