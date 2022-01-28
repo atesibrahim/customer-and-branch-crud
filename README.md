@@ -89,7 +89,7 @@ when no customer is in database then response returns empty list as:
 []
 
 ##### GET CUSTOMER by ID:
-**URL: localhost:8585/customer/getcustomer/{id}**
+**URL: localhost:8585/customers/{id}**
 
 RESPONSE:
 
@@ -109,7 +109,7 @@ when you search customer id which is not found response returns as:
 
 ##### DELETE CUSTOMER by ID:
 
-**URL: localhost:8585/customer/deletecustomer/{id}**
+**URL: localhost:8585/customers/{id}**
 
 RESPONSE:
 
@@ -125,7 +125,7 @@ when you want to delete customer id which is not found then response return as:
 ##### ADD NEW CUSTOMER:
 You can request to following url with following sample body
  
-**URL: localhost:8585/customer/addcustomer**
+**URL: localhost:8585/customers**
  
 Body:
 {
@@ -136,7 +136,7 @@ Body:
 ##### UPDATE CUSTOMER:
 You can updated customer fullname which is in body with id in url header 
 
-**URL: localhost:8585/customer/updatecustomer/{id}**
+**URL: localhost:8585/customers/{id}**
 
 Body:
 {
@@ -150,7 +150,7 @@ Response:
 
 ##### GET CUSTOMER BRANCHES:
  
-**URL: localhost:8585/customer/getcustomerbranches/{id}**
+**URL: localhost:8585/customers/getcustomerbranches/{id}**
 
 Response :
 [
@@ -177,7 +177,7 @@ When branch not found Response returns as:
 
 ##### GET BRANCH CUSTOMERS
 
-**URL: localhost:8585/branch/getbranchcustomers/{id}**
+**URL: localhost:8585/branchs/getbranchcustomers/{id}**
 
 Response:
 [
@@ -203,7 +203,7 @@ When customer not found Response returns as:
 
 ##### ADD CUSTOMER to BRANCH:
 
-**URL: localhost:8585/branch/addcustomertobranch/{customerid}/{branchid}**
+**URL: localhost:8585/branchs/addcustomertobranch/{customerid}/{branchid}**
 
 After success response returns added branch to customer as;
 
@@ -229,7 +229,7 @@ Or If customer id not exists then response returns as;
 
 ##### ADD BRANCH to CUSTOMER:
 
-**URL: localhost:8585/customer/addbranchtocustomer/{branchid}/{customerid}**   
+**URL: localhost:8585/customers/addbranchtocustomer/{branchid}/{customerid}**   
 
 After success response returns added customer to branch as;
 
@@ -255,7 +255,7 @@ Or If customer id not exists to be added branch then response returns as;
 
 ##### DELETE CUSTOMER from BRANCH:
 
-**URL: localhost:8585/branch/deletecustomerfrombranch/{customerid}/{branchid}**
+**URL: localhost:8585/branchs/deletecustomerfrombranch/{customerid}/{branchid}**
 
 
 Before request customer's branch list:
@@ -280,7 +280,7 @@ response returned new customer's branch list after deleted branch as:
 ]
  
  ##### DELETE BRANCH from CUSTOMER:
- **URL: llocalhost:8585/customer/deletebranchfromcustomer/{branchid}/{customerid}**
+ **URL: llocalhost:8585/customers/deletebranchfromcustomer/{branchid}/{customerid}**
  
  Before request branch's customer list:
  
