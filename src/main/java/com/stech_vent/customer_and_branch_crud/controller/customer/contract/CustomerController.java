@@ -13,25 +13,25 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Validated
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public interface CustomerController {
 
   @GetMapping("/health")
   ResponseEntity<String> checkHealth();
 
-  @GetMapping("/getcustomer/{id}")
+  @GetMapping("/{id}")
   ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long id) throws ResourceNotFoundException;
 
-  @GetMapping("/getcustomerlist")
+  @GetMapping
   ResponseEntity<List<Customer>> getCustomerList();
 
-  @PutMapping("/updatecustomer/{id}")
+  @PutMapping("/{id}")
   ResponseEntity<Customer> updateCustomerById(@PathVariable("id") Long id, @RequestBody Customer customer) throws ResourceNotFoundException, ResourceNotModifiedException;
 
-  @PostMapping("/addcustomer")
+  @PostMapping
   ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) throws ResourceNotImplementedException;
 
-  @DeleteMapping("/deletecustomer/{id}")
+  @DeleteMapping("/{id}")
   ResponseEntity<Boolean> deleteCustomerById(@PathVariable("id") Long id) throws ResourceNotImplementedException;
 
   @GetMapping("/getcustomerbranches/{id}")
